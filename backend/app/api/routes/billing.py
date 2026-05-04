@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, status
@@ -10,6 +11,8 @@ from app.models.deal import Deal
 from app.models.subscription import Subscription
 from app.models.user import User
 from app.schemas.billing import (
+    AdminActivateProRequest,
+    AdminActivateProResponse,
     BillingConfirmResponse,
     BillingPortalResponse,
     BillingStatusResponse,
@@ -243,6 +246,51 @@ def open_billing_portal(
         ) from exc
 
     return BillingPortalResponse(portal_url=portal_url)
+
+
+@router.post("/admin/activate-pro", response_model=AdminActivateProResponse)
+def activate_pro_admin(
+    payload: AdminActivateProRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> AdminActivateProResponse:
+    admin_email = os.getenv("ADMIN_EMAIL", "").strip().lower()
+
+    if not admin_email:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="ADMIN_EMAIL is not configured.",
+        )
+
+    if current_user.email.lower() != admin_email:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required.",
+        )
+
+    user = db.query(User).filter(User.email == payload.email).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found.",
+        )
+
+    subscription = get_or_create_subscription(db, user.id)
+    subscription.current_plan = "pro"
+    subscription.subscription_status = "active"
+
+    db.add(subscription)
+    db.commit()
+    db.refresh(subscription)
+
+    return AdminActivateProResponse(
+        message="Pro activated successfully.",
+        email=user.email,
+        current_plan=subscription.current_plan,
+        subscription_status=subscription.subscription_status,
+        is_pro=is_pro_subscription(subscription),
+    )
 
 
 @router.post("/webhook", status_code=200)

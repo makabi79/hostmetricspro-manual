@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class BillingStatusResponse(BaseModel):
@@ -19,6 +19,18 @@ class BillingPortalResponse(BaseModel):
 
 
 class BillingConfirmResponse(BaseModel):
+    current_plan: str
+    subscription_status: str
+    is_pro: bool
+
+
+class AdminActivateProRequest(BaseModel):
+    email: EmailStr
+
+
+class AdminActivateProResponse(BaseModel):
+    message: str
+    email: EmailStr
     current_plan: str
     subscription_status: str
     is_pro: bool
