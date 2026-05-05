@@ -3,14 +3,13 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { hasSession } from "@/lib/auth";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, logout } = useAuth();
 
-  const isAuthenticated = !loading && Boolean(user) && hasSession();
+  const isAuthenticated = !loading && Boolean(user);
 
   const handleLogout = () => {
     logout();
