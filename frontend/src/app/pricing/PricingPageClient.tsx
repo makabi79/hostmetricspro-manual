@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getToken } from "@/lib/auth";
 import {
-  createCheckoutSession,
   fetchBillingStatus,
+  fetchManualPaymentInstructions,
+  submitManualPayment,
   type BillingStatus,
+  type ManualPaymentInstructions,
 } from "@/lib/billing";
 
 const plans = [
@@ -34,7 +36,7 @@ const plans = [
       "Unlimited deals",
       "PDF export",
       "Advanced analytics",
-      "Automatic Pro activation after payment",
+      "Manual Pro activation after payment review",
       "Premium feature access",
       "Professional workflow",
     ],
@@ -48,14 +50,20 @@ const comparisonRows = [
   { feature: "Cap rate and ROI", free: "Included", pro: "Included" },
   { feature: "Deal score and verdict", free: "Included", pro: "Included" },
   { feature: "PDF export", free: "Not included", pro: "Included" },
-  { feature: "Payment", free: "No payment required", pro: "Dodo Payments" },
+  { feature: "Payment", free: "No payment required", pro: "Manual payment" },
 ];
 
 export default function PricingPageClient() {
   const [status, setStatus] = useState<BillingStatus | null>(null);
+  const [instructions, setInstructions] =
+    useState<ManualPaymentInstructions | null>(null);
   const [loading, setLoading] = useState(true);
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const isPendingManualPayment =
+    status?.subscription_status === "pending_manual_payment";
 
   useEffect(() => {
     const token = getToken();
@@ -65,15 +73,21 @@ export default function PricingPageClient() {
       return;
     }
 
-    async function loadBillingStatus() {
+    async function loadBillingData() {
       try {
         setLoading(true);
         setError("");
 
-        const data = await fetchBillingStatus();
-        setStatus(data);
+        const [billingStatus, manualInstructions] = await Promise.all([
+          fetchBillingStatus(),
+          fetchManualPaymentInstructions(),
+        ]);
+
+        setStatus(billingStatus);
+        setInstructions(manualInstructions);
       } catch (err) {
         setStatus(null);
+        setInstructions(null);
         setError(
           err instanceof Error ? err.message : "Failed to load billing status"
         );
@@ -82,10 +96,10 @@ export default function PricingPageClient() {
       }
     }
 
-    void loadBillingStatus();
+    void loadBillingData();
   }, []);
 
-  async function handleCheckout() {
+  async function handleSubmitManualPayment() {
     const token = getToken();
 
     if (!token) {
@@ -94,20 +108,30 @@ export default function PricingPageClient() {
     }
 
     try {
-      setCheckoutLoading(true);
+      setSubmitLoading(true);
       setError("");
+      setSuccessMessage("");
 
-      const data = await createCheckoutSession();
+      const response = await submitManualPayment();
 
-      if (!data.checkout_url) {
-        throw new Error("Checkout URL is missing.");
-      }
+      setStatus((previous) =>
+        previous
+          ? {
+              ...previous,
+              current_plan: response.current_plan,
+              subscription_status: response.subscription_status,
+              is_pro: response.is_pro,
+            }
+          : previous
+      );
 
-      window.location.href = data.checkout_url;
+      setSuccessMessage(response.message);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to start checkout");
+      setError(
+        err instanceof Error ? err.message : "Failed to submit manual payment"
+      );
     } finally {
-      setCheckoutLoading(false);
+      setSubmitLoading(false);
     }
   }
 
@@ -115,10 +139,10 @@ export default function PricingPageClient() {
     <main className="pricing-page">
       <section className="pricing-hero">
         <div className="container pricing-hero-inner">
-          <span className="badge">Simple pricing</span>
+          <span className="badge">Manual payment</span>
           <h1>Choose the plan that fits your investing workflow</h1>
           <p>
-            Start free, validate the product, and upgrade when you need
+            Start free, validate the product, and upgrade manually when you need
             unlimited deal analysis, PDF export, and advanced analytics.
           </p>
         </div>
@@ -143,21 +167,18 @@ export default function PricingPageClient() {
               </div>
 
               <div className="billing-status-actions">
-                {!status.is_pro ? (
-                  <button
-                    type="button"
-                    className="primary-button"
-                    onClick={handleCheckout}
-                    disabled={checkoutLoading}
-                  >
-                    {checkoutLoading
-                      ? "Starting checkout..."
-                      : "Start analyzing unlimited deals"}
-                  </button>
-                ) : (
+                {status.is_pro ? (
                   <Link href="/dashboard" className="secondary-button">
                     Go to Dashboard
                   </Link>
+                ) : isPendingManualPayment ? (
+                  <button type="button" className="secondary-button" disabled>
+                    Payment pending review
+                  </button>
+                ) : (
+                  <a href="#manual-payment" className="primary-button">
+                    View payment instructions
+                  </a>
                 )}
               </div>
             </div>
@@ -165,13 +186,20 @@ export default function PricingPageClient() {
 
           {error ? <div className="billing-error-box">{error}</div> : null}
 
+          {successMessage ? (
+            <div className="dashboard-banner dashboard-banner-success">
+              {successMessage}
+            </div>
+          ) : null}
+
           <div className="pricing-grid">
             {plans.map((plan) => {
               const isProCard = plan.name === "Pro";
               const isCurrentPlan =
                 status?.current_plan.toLowerCase() ===
                   plan.name.toLowerCase() &&
-                status?.subscription_status !== "canceled";
+                status?.subscription_status !== "canceled" &&
+                !isPendingManualPayment;
 
               return (
                 <article
@@ -200,8 +228,8 @@ export default function PricingPageClient() {
 
                   {isProCard ? (
                     <div style={{ marginTop: "12px", fontSize: "14px" }}>
-                      ✔ No risk — cancel anytime <br />
-                      ✔ Instant analysis in seconds <br />
+                      ✔ No automatic processor <br />
+                      ✔ Manual payment review <br />
                       ✔ Built for real investors, not theory
                     </div>
                   ) : null}
@@ -210,18 +238,32 @@ export default function PricingPageClient() {
                     <div className="current-plan-badge">Current plan</div>
                   ) : isProCard ? (
                     <>
-                      <button
-                        type="button"
-                        className="primary-button"
-                        onClick={handleCheckout}
-                        disabled={checkoutLoading}
+                      {status?.is_pro ? (
+                        <Link href="/dashboard" className="secondary-button">
+                          Go to Dashboard
+                        </Link>
+                      ) : isPendingManualPayment ? (
+                        <button
+                          type="button"
+                          className="secondary-button"
+                          disabled
+                        >
+                          Payment pending review
+                        </button>
+                      ) : (
+                        <a href="#manual-payment" className="primary-button">
+                          Upgrade with manual payment
+                        </a>
+                      )}
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          marginTop: "8px",
+                          color: "#666",
+                        }}
                       >
-                        {checkoutLoading
-                          ? "Starting checkout..."
-                          : "Start analyzing unlimited deals"}
-                      </button>
-                      <p style={{ fontSize: "12px", marginTop: "8px", color: "#666" }}>
-                        Early users price: $29/month. May increase later.
+                        Early users price: $29/month. Manual activation after
+                        payment confirmation.
                       </p>
                     </>
                   ) : (
@@ -235,6 +277,86 @@ export default function PricingPageClient() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section id="manual-payment" className="section-block section-alt">
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-label">Manual payment instructions</span>
+            <h2>Upgrade to Pro without Stripe, Paddle, Dodo, Lemon, Polar, or Creem.</h2>
+            <p>
+              Payment is reviewed manually. Pro is activated only after admin
+              confirmation.
+            </p>
+          </div>
+
+          <div className="surface-card">
+            {!getToken() ? (
+              <>
+                <h3>Sign up or log in first</h3>
+                <p>
+                  You need an account before submitting a manual payment review.
+                </p>
+                <div className="hero-actions">
+                  <Link href="/signup" className="primary-button">
+                    Create account
+                  </Link>
+                  <Link href="/login" className="secondary-button">
+                    Log in
+                  </Link>
+                </div>
+              </>
+            ) : instructions ? (
+              <>
+                <h3>{instructions.plan_name}</h3>
+                <p>
+                  <strong>Price:</strong> {instructions.price}
+                </p>
+                <p>
+                  <strong>Recipient:</strong> {instructions.recipient}
+                </p>
+                <p>
+                  <strong>Payment contact:</strong>{" "}
+                  <a href={`mailto:${instructions.payment_email}`}>
+                    {instructions.payment_email}
+                  </a>
+                </p>
+
+                <ul className="pricing-features" style={{ marginTop: "18px" }}>
+                  {instructions.instructions.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+
+                <div className="hero-actions">
+                  {status?.is_pro ? (
+                    <Link href="/dashboard" className="secondary-button">
+                      Go to Dashboard
+                    </Link>
+                  ) : isPendingManualPayment ? (
+                    <button type="button" className="secondary-button" disabled>
+                      Payment pending review
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="primary-button"
+                      onClick={handleSubmitManualPayment}
+                      disabled={submitLoading}
+                    >
+                      {submitLoading ? "Submitting..." : "I Paid"}
+                    </button>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <h3>Payment instructions unavailable</h3>
+                <p>Please log in again and reload this page.</p>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -272,10 +394,10 @@ export default function PricingPageClient() {
           <div className="cta-banner">
             <div>
               <span className="section-label">Upgrade path</span>
-              <h2>Start free. Upgrade when you need unlimited analysis.</h2>
+              <h2>Start free. Upgrade manually when ready.</h2>
               <p>
-                Pay securely with Dodo Payments. Your Pro plan will activate
-                after successful payment confirmation.
+                Submit payment manually, click I Paid, then Pro will be
+                activated after admin review.
               </p>
             </div>
 
@@ -293,17 +415,14 @@ export default function PricingPageClient() {
                 <Link href="/dashboard" className="secondary-button">
                   Go to Dashboard
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={handleCheckout}
-                  disabled={checkoutLoading}
-                >
-                  {checkoutLoading
-                    ? "Starting checkout..."
-                    : "Start analyzing unlimited deals"}
+              ) : isPendingManualPayment ? (
+                <button type="button" className="secondary-button" disabled>
+                  Payment pending review
                 </button>
+              ) : (
+                <a href="#manual-payment" className="primary-button">
+                  View payment instructions
+                </a>
               )}
             </div>
           </div>

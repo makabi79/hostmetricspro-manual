@@ -1,18 +1,22 @@
 import { api } from "@/lib/api";
+import type {
+  BillingStatus,
+  ManualPaymentInstructions,
+  SubmitManualPaymentResponse,
+} from "@/lib/api";
 
-export type BillingStatus = {
-  current_plan: string;
-  subscription_status: string;
-  can_create_more_deals: boolean;
-  max_deals: number | null;
-  deals_used: number;
-  is_pro: boolean;
-};
+export type { BillingStatus, ManualPaymentInstructions, SubmitManualPaymentResponse };
 
 export async function fetchBillingStatus(): Promise<BillingStatus> {
   return api.getBillingStatus();
 }
 
-export async function createCheckoutSession(): Promise<{ checkout_url: string }> {
-  return api.createCheckoutSession();
+export async function fetchManualPaymentInstructions(): Promise<ManualPaymentInstructions> {
+  return api.getManualPaymentInstructions();
+}
+
+export async function submitManualPayment(
+  note?: string
+): Promise<SubmitManualPaymentResponse> {
+  return api.submitManualPayment({ note: note || null });
 }

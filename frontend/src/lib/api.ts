@@ -21,7 +21,16 @@ export type BillingStatus = {
   is_pro: boolean;
 };
 
-export type BillingConfirmResponse = {
+export type ManualPaymentInstructions = {
+  plan_name: string;
+  price: string;
+  recipient: string;
+  payment_email: string;
+  instructions: string[];
+};
+
+export type SubmitManualPaymentResponse = {
+  message: string;
   current_plan: string;
   subscription_status: string;
   is_pro: boolean;
@@ -212,29 +221,21 @@ export const api = {
       true
     ),
 
-  createCheckoutSession: () =>
-    request<{ checkout_url: string }>(
-      "/billing/checkout",
-      {
-        method: "POST",
-      },
-      true
-    ),
-
-  confirmCheckoutSession: (sessionId: string) =>
-    request<BillingConfirmResponse>(
-      `/billing/confirm?checkout_session_id=${encodeURIComponent(sessionId)}`,
+  getManualPaymentInstructions: () =>
+    request<ManualPaymentInstructions>(
+      "/billing/manual-payment-instructions",
       {
         method: "GET",
       },
       true
     ),
 
-  createBillingPortal: () =>
-    request<{ portal_url: string }>(
-      "/billing/portal",
+  submitManualPayment: (payload: { note?: string | null } = {}) =>
+    request<SubmitManualPaymentResponse>(
+      "/billing/manual-payment/submit",
       {
         method: "POST",
+        body: JSON.stringify(payload),
       },
       true
     ),
