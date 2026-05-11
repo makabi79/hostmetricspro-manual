@@ -10,15 +10,20 @@ class BillingStatusResponse(BaseModel):
     is_pro: bool
 
 
-class CheckoutSessionResponse(BaseModel):
-    checkout_url: str
+class ManualPaymentInstructionsResponse(BaseModel):
+    plan_name: str
+    price: str
+    recipient: str
+    payment_email: str
+    instructions: list[str]
 
 
-class BillingPortalResponse(BaseModel):
-    portal_url: str
+class SubmitManualPaymentRequest(BaseModel):
+    note: str | None = None
 
 
-class BillingConfirmResponse(BaseModel):
+class SubmitManualPaymentResponse(BaseModel):
+    message: str
     current_plan: str
     subscription_status: str
     is_pro: bool
