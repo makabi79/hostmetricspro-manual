@@ -5,7 +5,11 @@ import type {
   SubmitManualPaymentResponse,
 } from "@/lib/api";
 
-export type { BillingStatus, ManualPaymentInstructions, SubmitManualPaymentResponse };
+export type {
+  BillingStatus,
+  ManualPaymentInstructions,
+  SubmitManualPaymentResponse,
+};
 
 export async function fetchBillingStatus(): Promise<BillingStatus> {
   return api.getBillingStatus();
@@ -16,7 +20,11 @@ export async function fetchManualPaymentInstructions(): Promise<ManualPaymentIns
 }
 
 export async function submitManualPayment(
+  paymentMethod?: string,
   note?: string
 ): Promise<SubmitManualPaymentResponse> {
-  return api.submitManualPayment({ note: note || null });
+  return api.submitManualPayment({
+    payment_method: paymentMethod || null,
+    note: note || null,
+  });
 }

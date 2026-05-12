@@ -24,12 +24,6 @@ class Settings(BaseSettings):
     )
     app_base_url: str = "http://localhost:3000"
 
-    dodo_payments_api_key: str = ""
-    dodo_payments_webhook_key: str = ""
-    dodo_pro_product_id: str = ""
-    dodo_payments_environment: str = "test"
-    dodo_webhook_tolerance_seconds: int = 300
-
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
@@ -85,14 +79,6 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return value.strip().rstrip("/")
         return value
-
-    @field_validator("dodo_payments_environment", mode="before")
-    @classmethod
-    def normalize_dodo_environment(cls, value):
-        if isinstance(value, str):
-            normalized = value.strip().lower()
-            return normalized if normalized in {"test", "live"} else "test"
-        return "test"
 
 
 @lru_cache

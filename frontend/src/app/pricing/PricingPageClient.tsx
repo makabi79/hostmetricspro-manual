@@ -28,7 +28,7 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "$29",
+    price: "$29 / €29",
     period: "/month",
     description:
       "Stop guessing your Airbnb deal profitability. Know your real cash flow, ROI, and risk BEFORE you buy. Built for serious STR investors.",
@@ -36,9 +36,9 @@ const plans = [
       "Unlimited deals",
       "PDF export",
       "Advanced analytics",
+      "PayPal manual payment in USD",
+      "Wise manual payment in EUR",
       "Manual Pro activation after payment review",
-      "Premium feature access",
-      "Professional workflow",
     ],
     highlighted: true,
   },
@@ -50,7 +50,7 @@ const comparisonRows = [
   { feature: "Cap rate and ROI", free: "Included", pro: "Included" },
   { feature: "Deal score and verdict", free: "Included", pro: "Included" },
   { feature: "PDF export", free: "Not included", pro: "Included" },
-  { feature: "Payment", free: "No payment required", pro: "Manual payment" },
+  { feature: "Payment", free: "No payment required", pro: "PayPal USD or Wise EUR" },
 ];
 
 export default function PricingPageClient() {
@@ -58,7 +58,7 @@ export default function PricingPageClient() {
   const [instructions, setInstructions] =
     useState<ManualPaymentInstructions | null>(null);
   const [loading, setLoading] = useState(true);
-  const [submitLoading, setSubmitLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -99,7 +99,7 @@ export default function PricingPageClient() {
     void loadBillingData();
   }, []);
 
-  async function handleSubmitManualPayment() {
+  async function handleSubmitManualPayment(paymentMethod: string) {
     const token = getToken();
 
     if (!token) {
@@ -108,11 +108,11 @@ export default function PricingPageClient() {
     }
 
     try {
-      setSubmitLoading(true);
+      setSubmitLoading(paymentMethod);
       setError("");
       setSuccessMessage("");
 
-      const response = await submitManualPayment();
+      const response = await submitManualPayment(paymentMethod);
 
       setStatus((previous) =>
         previous
@@ -131,7 +131,7 @@ export default function PricingPageClient() {
         err instanceof Error ? err.message : "Failed to submit manual payment"
       );
     } finally {
-      setSubmitLoading(false);
+      setSubmitLoading("");
     }
   }
 
@@ -142,8 +142,8 @@ export default function PricingPageClient() {
           <span className="badge">Manual payment</span>
           <h1>Choose the plan that fits your investing workflow</h1>
           <p>
-            Start free, validate the product, and upgrade manually when you need
-            unlimited deal analysis, PDF export, and advanced analytics.
+            Start free, validate the product, and upgrade manually with PayPal
+            in USD or Wise in EUR.
           </p>
         </div>
       </section>
@@ -226,14 +226,6 @@ export default function PricingPageClient() {
                     ))}
                   </ul>
 
-                  {isProCard ? (
-                    <div style={{ marginTop: "12px", fontSize: "14px" }}>
-                      ✔ No automatic processor <br />
-                      ✔ Manual payment review <br />
-                      ✔ Built for real investors, not theory
-                    </div>
-                  ) : null}
-
                   {isCurrentPlan ? (
                     <div className="current-plan-badge">Current plan</div>
                   ) : isProCard ? (
@@ -252,7 +244,7 @@ export default function PricingPageClient() {
                         </button>
                       ) : (
                         <a href="#manual-payment" className="primary-button">
-                          Upgrade with manual payment
+                          Upgrade manually
                         </a>
                       )}
                       <p
@@ -262,8 +254,8 @@ export default function PricingPageClient() {
                           color: "#666",
                         }}
                       >
-                        Early users price: $29/month. Manual activation after
-                        payment confirmation.
+                        PayPal: $29/month. Wise: €29/month. Pro is activated
+                        after admin review.
                       </p>
                     </>
                   ) : (
@@ -285,9 +277,9 @@ export default function PricingPageClient() {
         <div className="container">
           <div className="section-heading">
             <span className="section-label">Manual payment instructions</span>
-            <h2>Upgrade to Pro without Stripe, Paddle, Dodo, Lemon, Polar, or Creem.</h2>
+            <h2>Upgrade to Pro with PayPal or Wise.</h2>
             <p>
-              Payment is reviewed manually. Pro is activated only after admin
+              Pay manually, click I Paid, and Pro will be activated after admin
               confirmation.
             </p>
           </div>
@@ -311,18 +303,45 @@ export default function PricingPageClient() {
             ) : instructions ? (
               <>
                 <h3>{instructions.plan_name}</h3>
-                <p>
-                  <strong>Price:</strong> {instructions.price}
-                </p>
-                <p>
-                  <strong>Recipient:</strong> {instructions.recipient}
-                </p>
-                <p>
-                  <strong>Payment contact:</strong>{" "}
-                  <a href={`mailto:${instructions.payment_email}`}>
-                    {instructions.payment_email}
-                  </a>
-                </p>
+
+                <div className="feature-grid" style={{ marginTop: "18px" }}>
+                  {instructions.payment_options.map((option) => (
+                    <article key={option.method} className="feature-card">
+                      <h3>{option.method}</h3>
+                      <p>
+                        <strong>Amount:</strong> {option.price}
+                      </p>
+                      <p>
+                        <strong>Currency:</strong> {option.currency}
+                      </p>
+                      <p>
+                        <strong>Recipient:</strong> {option.recipient}
+                      </p>
+                      <p>
+                        <strong>Payment email:</strong>{" "}
+                        <a href={`mailto:${option.payment_email}`}>
+                          {option.payment_email}
+                        </a>
+                      </p>
+                      <p>{option.note}</p>
+
+                      <button
+                        type="button"
+                        className="primary-button"
+                        onClick={() => handleSubmitManualPayment(option.method)}
+                        disabled={
+                          Boolean(submitLoading) ||
+                          status?.is_pro ||
+                          isPendingManualPayment
+                        }
+                      >
+                        {submitLoading === option.method
+                          ? "Submitting..."
+                          : `I Paid with ${option.method}`}
+                      </button>
+                    </article>
+                  ))}
+                </div>
 
                 <ul className="pricing-features" style={{ marginTop: "18px" }}>
                   {instructions.instructions.map((item) => (
@@ -339,16 +358,7 @@ export default function PricingPageClient() {
                     <button type="button" className="secondary-button" disabled>
                       Payment pending review
                     </button>
-                  ) : (
-                    <button
-                      type="button"
-                      className="primary-button"
-                      onClick={handleSubmitManualPayment}
-                      disabled={submitLoading}
-                    >
-                      {submitLoading ? "Submitting..." : "I Paid"}
-                    </button>
-                  )}
+                  ) : null}
                 </div>
               </>
             ) : (
@@ -396,7 +406,7 @@ export default function PricingPageClient() {
               <span className="section-label">Upgrade path</span>
               <h2>Start free. Upgrade manually when ready.</h2>
               <p>
-                Submit payment manually, click I Paid, then Pro will be
+                Pay with PayPal or Wise, click I Paid, then Pro will be
                 activated after admin review.
               </p>
             </div>

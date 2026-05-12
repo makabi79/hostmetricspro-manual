@@ -21,12 +21,19 @@ export type BillingStatus = {
   is_pro: boolean;
 };
 
-export type ManualPaymentInstructions = {
-  plan_name: string;
+export type ManualPaymentOption = {
+  method: string;
+  currency: string;
   price: string;
   recipient: string;
   payment_email: string;
+  note: string;
+};
+
+export type ManualPaymentInstructions = {
+  plan_name: string;
   instructions: string[];
+  payment_options: ManualPaymentOption[];
 };
 
 export type SubmitManualPaymentResponse = {
@@ -230,7 +237,10 @@ export const api = {
       true
     ),
 
-  submitManualPayment: (payload: { note?: string | null } = {}) =>
+  submitManualPayment: (payload: {
+    note?: string | null;
+    payment_method?: string | null;
+  } = {}) =>
     request<SubmitManualPaymentResponse>(
       "/billing/manual-payment/submit",
       {

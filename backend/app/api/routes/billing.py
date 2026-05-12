@@ -1,5 +1,4 @@
 import os
-from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -14,6 +13,7 @@ from app.schemas.billing import (
     AdminActivateProResponse,
     BillingStatusResponse,
     ManualPaymentInstructionsResponse,
+    ManualPaymentOption,
     SubmitManualPaymentRequest,
     SubmitManualPaymentResponse,
 )
@@ -21,7 +21,8 @@ from app.schemas.billing import (
 router = APIRouter(prefix="/billing", tags=["billing"])
 
 FREE_PLAN_MAX_DEALS = 3
-PRO_PLAN_PRICE = "$29/month"
+PRO_PLAN_PRICE_USD = "$29/month"
+PRO_PLAN_PRICE_EUR = "€29/month"
 PENDING_MANUAL_PAYMENT_STATUS = "pending_manual_payment"
 
 
@@ -48,12 +49,8 @@ def is_pro_subscription(subscription: Subscription) -> bool:
     )
 
 
-def get_manual_payment_email() -> str:
-    return os.getenv("MANUAL_PAYMENT_EMAIL", "support@hostmetricpro.com").strip()
-
-
-def get_manual_payment_recipient() -> str:
-    return os.getenv("MANUAL_PAYMENT_RECIPIENT", "HostMetricsPro").strip()
+def env_value(key: str, default: str = "") -> str:
+    return os.getenv(key, default).strip()
 
 
 @router.get("/status", response_model=BillingStatusResponse)
@@ -79,21 +76,39 @@ def get_billing_status(
 def get_manual_payment_instructions(
     current_user: User = Depends(get_current_user),
 ) -> ManualPaymentInstructionsResponse:
-    payment_email = get_manual_payment_email()
-    recipient = get_manual_payment_recipient()
+    paypal_email = env_value("MANUAL_PAYPAL_EMAIL", "support@hostmetricpro.com")
+    wise_email = env_value("MANUAL_WISE_EMAIL", "support@hostmetricpro.com")
+    wise_recipient = env_value("MANUAL_WISE_RECIPIENT", "HostMetricsPro")
+    paypal_recipient = env_value("MANUAL_PAYPAL_RECIPIENT", "HostMetricsPro")
 
     return ManualPaymentInstructionsResponse(
         plan_name="HostMetricsPro Pro",
-        price=PRO_PLAN_PRICE,
-        recipient=recipient,
-        payment_email=payment_email,
         instructions=[
-            "Send the Pro plan payment manually.",
-            f"Amount: {PRO_PLAN_PRICE}.",
+            "Choose PayPal or Wise manual payment.",
+            f"PayPal amount: {PRO_PLAN_PRICE_USD}.",
+            f"Wise amount: {PRO_PLAN_PRICE_EUR}.",
             f"Use your HostMetricsPro account email as payment reference: {current_user.email}.",
             "After payment, click the I Paid button.",
             "Your account will remain pending until admin review.",
             "After confirmation, admin will activate Pro manually.",
+        ],
+        payment_options=[
+            ManualPaymentOption(
+                method="PayPal",
+                currency="USD",
+                price=PRO_PLAN_PRICE_USD,
+                recipient=paypal_recipient,
+                payment_email=paypal_email,
+                note=f"Use your HostMetricsPro account email as payment reference: {current_user.email}.",
+            ),
+            ManualPaymentOption(
+                method="Wise",
+                currency="EUR",
+                price=PRO_PLAN_PRICE_EUR,
+                recipient=wise_recipient,
+                payment_email=wise_email,
+                note=f"Use your HostMetricsPro account email as payment reference: {current_user.email}.",
+            ),
         ],
     )
 
@@ -104,8 +119,6 @@ def submit_manual_payment(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ) -> SubmitManualPaymentResponse:
-    _ = payload
-
     subscription = get_or_create_subscription(db, current_user.id)
 
     if is_pro_subscription(subscription):
@@ -135,7 +148,7 @@ def activate_pro_admin(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ) -> AdminActivateProResponse:
-    admin_email = os.getenv("ADMIN_EMAIL", "").strip().lower()
+    admin_email = env_value("ADMIN_EMAIL").lower()
 
     if not admin_email:
         raise HTTPException(
