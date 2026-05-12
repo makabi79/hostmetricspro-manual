@@ -280,7 +280,7 @@ export default function PricingPageClient() {
       <section
         id="manual-payment"
         className="section-block section-alt"
-        style={{ scrollMarginTop: "120px", paddingTop: "96px" }}
+        style={{ scrollMarginTop: "120px" }}
       >
         <div className="container">
           <div className="section-heading">
