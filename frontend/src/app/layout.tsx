@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   publisher: "HostMetricsPro",
 
   verification: {
-    google: "VLoEafaqK",
+  google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
   },
-
+  
   alternates: {
     canonical: siteUrl,
   },
