@@ -189,6 +189,51 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section-block section-alt">
+        <div className="container">
+          <div className="section-heading section-heading-left">
+            <span className="section-label">Free Tools</span>
+
+            <h2>Free Airbnb Investment Calculators</h2>
+
+            <p>
+              Explore free Airbnb and short-term rental investment analysis tools
+              built for real estate investors and STR hosts.
+            </p>
+          </div>
+
+          <div className="three-card-grid">
+            <Link href="/airbnb-roi-calculator" className="surface-card">
+              <h3>Airbnb ROI Calculator</h3>
+              <p>
+                Calculate Airbnb return on investment, annual ROI, and cash-on-cash returns.
+              </p>
+            </Link>
+
+            <Link href="/cap-rate-calculator" className="surface-card">
+              <h3>Cap Rate Calculator</h3>
+              <p>
+                Analyze property cap rate and investment profitability for STR deals.
+              </p>
+            </Link>
+
+            <Link href="/cash-flow-calculator" className="surface-card">
+              <h3>Cash Flow Calculator</h3>
+              <p>
+                Estimate monthly and yearly Airbnb rental cash flow.
+              </p>
+            </Link>
+
+            <Link href="/airbnb-investment-analysis" className="surface-card">
+              <h3>Airbnb Investment Analysis</h3>
+              <p>
+                Analyze Airbnb deals with ROI, occupancy, expenses, and risk metrics.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section-block">
         <div className="container">
           <div className="final-cta-card">
