@@ -5,7 +5,7 @@ import { AuthProvider } from "@/components/auth/AuthProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
 const siteUrl = "https://hostmetricpro.com";
-const googleAnalyticsId = "G-E7SJ92EDWD";
+const googleAnalyticsId = "G-GJHC0L7TYR";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
