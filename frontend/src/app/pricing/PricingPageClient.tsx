@@ -50,7 +50,11 @@ const comparisonRows = [
   { feature: "Cap rate and ROI", free: "Included", pro: "Included" },
   { feature: "Deal score and verdict", free: "Included", pro: "Included" },
   { feature: "PDF export", free: "Not included", pro: "Included" },
-  { feature: "Payment", free: "No payment required", pro: "PayPal USD or Wise EUR" },
+  {
+    feature: "Payment",
+    free: "No payment required",
+    pro: "PayPal USD or Wise EUR",
+  },
 ];
 
 export default function PricingPageClient() {
@@ -273,7 +277,11 @@ export default function PricingPageClient() {
         </div>
       </section>
 
-      <section id="manual-payment" className="section-block section-alt">
+      <section
+        id="manual-payment"
+        className="section-block section-alt"
+        style={{ scrollMarginTop: "120px", paddingTop: "96px" }}
+      >
         <div className="container">
           <div className="section-heading">
             <span className="section-label">Manual payment instructions</span>
@@ -308,21 +316,26 @@ export default function PricingPageClient() {
                   {instructions.payment_options.map((option) => (
                     <article key={option.method} className="feature-card">
                       <h3>{option.method}</h3>
+
                       <p>
                         <strong>Amount:</strong> {option.price}
                       </p>
+
                       <p>
                         <strong>Currency:</strong> {option.currency}
                       </p>
+
                       <p>
                         <strong>Recipient:</strong> {option.recipient}
                       </p>
+
                       <p>
                         <strong>Payment email:</strong>{" "}
                         <a href={`mailto:${option.payment_email}`}>
                           {option.payment_email}
                         </a>
                       </p>
+
                       <p>{option.note}</p>
 
                       <button
