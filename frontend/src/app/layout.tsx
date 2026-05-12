@@ -7,12 +7,15 @@ const siteUrl = "https://hostmetricpro.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+
   title: {
     default: "HostMetricsPro | Airbnb ROI & STR Deal Analyzer",
     template: "%s | HostMetricsPro",
   },
+
   description:
     "Analyze Airbnb and short-term rental deals with cash flow, cap rate, ROI, break-even occupancy, deal score, risk, and PDF export.",
+
   keywords: [
     "Airbnb ROI calculator",
     "Airbnb profit calculator",
@@ -22,12 +25,19 @@ export const metadata: Metadata = {
     "Airbnb investment analysis",
     "real estate investment calculator",
   ],
+
   authors: [{ name: "HostMetricsPro" }],
   creator: "HostMetricsPro",
   publisher: "HostMetricsPro",
+
+  verification: {
+    google: "VLoEafaqK",
+  },
+
   alternates: {
     canonical: siteUrl,
   },
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -37,15 +47,18 @@ export const metadata: Metadata = {
     description:
       "Analyze Airbnb and short-term rental deals before you buy. Calculate cash flow, ROI, cap rate, break-even occupancy, risk, and deal score.",
   },
+
   twitter: {
     card: "summary_large_image",
     title: "HostMetricsPro | Airbnb ROI & STR Deal Analyzer",
     description:
       "Airbnb and short-term rental deal analysis SaaS for investors.",
   },
+
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -80,21 +93,27 @@ export default function RootLayout({
                   <a href="/" className="site-footer-link">
                     Home
                   </a>
+
                   <a href="/pricing" className="site-footer-link">
                     Pricing
                   </a>
+
                   <a href="/signup" className="site-footer-link">
                     Signup
                   </a>
+
                   <a href="/terms" className="site-footer-link">
                     Terms of Service
                   </a>
+
                   <a href="/privacy" className="site-footer-link">
                     Privacy Policy
                   </a>
+
                   <a href="/refund" className="site-footer-link">
                     Refund Policy
                   </a>
+
                   <a
                     href="mailto:support.hostmetricpro@gmail.com"
                     className="site-footer-link"
