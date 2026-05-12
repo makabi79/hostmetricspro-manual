@@ -250,8 +250,13 @@ export default function PricingPageClient() {
                           Payment pending review
                         </button>
                       ) : (
-                        <a href="#manual-payment" className="primary-button">
-                          Upgrade manually
+                        <a
+                          href="https://www.paypal.com/ncp/payment/EGAMPSU62XY6L"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="primary-button"
+                        >
+                          Pay with PayPal
                         </a>
                       )}
                       <p
