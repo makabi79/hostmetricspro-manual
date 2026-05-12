@@ -11,6 +11,12 @@ import {
   type ManualPaymentInstructions,
 } from "@/lib/billing";
 
+const PAYPAL_PAYMENT_URL =
+  "https://www.paypal.com/ncp/payment/EGAMPSU62XY6L";
+
+const WISE_PAYMENT_URL =
+  "https://wise.com/pay/me/bidzinan?utm_source=request_flow";
+
 const plans = [
   {
     name: "Free",
@@ -251,7 +257,7 @@ export default function PricingPageClient() {
                         </button>
                       ) : (
                         <a
-                          href="https://www.paypal.com/ncp/payment/EGAMPSU62XY6L"
+                          href={PAYPAL_PAYMENT_URL}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="primary-button"
@@ -259,6 +265,7 @@ export default function PricingPageClient() {
                           Pay with PayPal
                         </a>
                       )}
+
                       <p
                         style={{
                           fontSize: "12px",
@@ -321,61 +328,80 @@ export default function PricingPageClient() {
                 <h3>{instructions.plan_name}</h3>
 
                 <div className="feature-grid" style={{ marginTop: "18px" }}>
-                  {instructions.payment_options.map((option) => (
-                    <article key={option.method} className="feature-card">
-                      <h3>{option.method}</h3>
+                  {instructions.payment_options.map((option) => {
+                    const paymentUrl =
+                      option.method === "Wise"
+                        ? WISE_PAYMENT_URL
+                        : PAYPAL_PAYMENT_URL;
 
-                      <p>
-                        <strong>Amount:</strong> {option.price}
-                      </p>
+                    return (
+                      <article key={option.method} className="feature-card">
+                        <h3>{option.method}</h3>
 
-                      <p>
-                        <strong>Currency:</strong> {option.currency}
-                      </p>
+                        <p>
+                          <strong>Amount:</strong> {option.price}
+                        </p>
 
-                      <p>
-                        <strong>Recipient:</strong> {option.recipient}
-                      </p>
+                        <p>
+                          <strong>Currency:</strong> {option.currency}
+                        </p>
 
-                      <p>
-                        <strong>
-                          {option.method === "Wise"
-                            ? "Payment link:"
-                            : "Payment email:"}
-                        </strong>{" "}
-                        {option.method === "Wise" ? (
-                          <a
-                            href="https://wise.com/pay/me/bidzinan?utm_source=request_flow"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Open Wise Payment
-                          </a>
-                        ) : (
-                          <a href={`mailto:${option.payment_email}`}>
-                            {option.payment_email}
-                          </a>
-                        )}
-                      </p>
+                        <p>
+                          <strong>Recipient:</strong> {option.recipient}
+                        </p>
 
-                      <p>{option.note}</p>
+                        <p>
+                          <strong>
+                            {option.method === "Wise"
+                              ? "Payment link:"
+                              : "Payment email:"}
+                          </strong>{" "}
+                          {option.method === "Wise" ? (
+                            <a
+                              href={WISE_PAYMENT_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Open Wise Payment
+                            </a>
+                          ) : (
+                            <a href={`mailto:${option.payment_email}`}>
+                              {option.payment_email}
+                            </a>
+                          )}
+                        </p>
 
-                      <button
-                        type="button"
-                        className="primary-button"
-                        onClick={() => handleSubmitManualPayment(option.method)}
-                        disabled={
-                          Boolean(submitLoading) ||
-                          status?.is_pro ||
-                          isPendingManualPayment
-                        }
-                      >
-                        {submitLoading === option.method
-                          ? "Submitting..."
-                          : `I Paid with ${option.method}`}
-                      </button>
-                    </article>
-                  ))}
+                        <p>{option.note}</p>
+
+                        <a
+                          href={paymentUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="primary-button"
+                          style={{ marginBottom: "10px" }}
+                        >
+                          Pay with {option.method}
+                        </a>
+
+                        <button
+                          type="button"
+                          className="secondary-button"
+                          onClick={() =>
+                            handleSubmitManualPayment(option.method)
+                          }
+                          disabled={
+                            Boolean(submitLoading) ||
+                            status?.is_pro ||
+                            isPendingManualPayment
+                          }
+                        >
+                          {submitLoading === option.method
+                            ? "Submitting..."
+                            : `I Paid with ${option.method}`}
+                        </button>
+                      </article>
+                    );
+                  })}
                 </div>
 
                 <ul className="pricing-features" style={{ marginTop: "18px" }}>
