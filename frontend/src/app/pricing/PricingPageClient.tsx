@@ -338,10 +338,24 @@ export default function PricingPageClient() {
                       </p>
 
                       <p>
-                        <strong>Payment email:</strong>{" "}
-                        <a href={`mailto:${option.payment_email}`}>
-                          {option.payment_email}
-                        </a>
+                        <strong>
+                          {option.method === "Wise"
+                            ? "Payment link:"
+                            : "Payment email:"}
+                        </strong>{" "}
+                        {option.method === "Wise" ? (
+                          <a
+                            href="https://wise.com/pay/me/bidzinan?utm_source=request_flow"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Open Wise Payment
+                          </a>
+                        ) : (
+                          <a href={`mailto:${option.payment_email}`}>
+                            {option.payment_email}
+                          </a>
+                        )}
                       </p>
 
                       <p>{option.note}</p>
