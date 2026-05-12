@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
 const siteUrl = "https://hostmetricpro.com";
+const googleAnalyticsId = "G-E7SJ92EDWD";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,9 +33,9 @@ export const metadata: Metadata = {
   publisher: "HostMetricsPro",
 
   verification: {
-  google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
+    google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
   },
-  
+
   alternates: {
     canonical: siteUrl,
   },
@@ -77,6 +79,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "${googleAnalyticsId}");
+          `}
+        </Script>
+
         <AuthProvider>
           <div className="site-shell">
             <SiteHeader />
@@ -100,6 +116,25 @@ export default function RootLayout({
 
                   <a href="/signup" className="site-footer-link">
                     Signup
+                  </a>
+
+                  <a href="/airbnb-roi-calculator" className="site-footer-link">
+                    ROI Calculator
+                  </a>
+
+                  <a href="/cap-rate-calculator" className="site-footer-link">
+                    Cap Rate Calculator
+                  </a>
+
+                  <a href="/cash-flow-calculator" className="site-footer-link">
+                    Cash Flow Calculator
+                  </a>
+
+                  <a
+                    href="/airbnb-investment-analysis"
+                    className="site-footer-link"
+                  >
+                    Investment Analysis
                   </a>
 
                   <a href="/terms" className="site-footer-link">
