@@ -65,12 +65,15 @@ export default function PricingPageClient() {
   const [submitLoading, setSubmitLoading] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [hasToken, setHasToken] = useState(false);
 
   const isPendingManualPayment =
     status?.subscription_status === "pending_manual_payment";
 
   useEffect(() => {
     const token = getToken();
+
+    setHasToken(Boolean(token));
 
     if (!token) {
       setLoading(false);
@@ -293,7 +296,7 @@ export default function PricingPageClient() {
           </div>
 
           <div className="surface-card">
-            {!getToken() ? (
+            {!hasToken ? (
               <>
                 <h3>Sign up or log in first</h3>
                 <p>
