@@ -83,6 +83,7 @@ const demoDeal: Partial<Deal> = {
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8001/api/v1";
 
+const ADMIN_EMAIL = "admin@hostmetricspro.com";
 const FREE_PLAN_LIMIT_CODE = "FREE_PLAN_LIMIT_REACHED";
 const FREE_PLAN_LIMIT_MESSAGE = "You reached your free limit";
 const FREE_PLAN_UPGRADE_MESSAGE = "Upgrade to Pro to continue";
@@ -112,9 +113,14 @@ function DashboardContent() {
   const [exportingId, setExportingId] = useState<number | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
+  const [adminCustomerEmail, setAdminCustomerEmail] = useState("");
+  const [adminActivating, setAdminActivating] = useState(false);
+
   const [pageError, setPageError] = useState("");
   const [formError, setFormError] = useState("");
   const [notice, setNotice] = useState<NoticeState>(null);
+
+  const isAdmin = user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
   useEffect(() => {
     void loadDashboard();
@@ -263,6 +269,48 @@ function DashboardContent() {
         startCheckout();
       },
     });
+  }
+
+  async function handleAdminActivatePro(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const email = adminCustomerEmail.trim().toLowerCase();
+
+    if (!email) {
+      setNotice({ type: "error", text: "Enter customer email." });
+      return;
+    }
+
+    try {
+      setAdminActivating(true);
+      setNotice(null);
+      setPageError("");
+
+      const result = await api.activateProAdmin({ email });
+
+      setNotice({
+        type: "success",
+        text: `Pro activated successfully for ${result.email}.`,
+      });
+
+      setAdminCustomerEmail("");
+      await loadDashboard();
+    } catch (err) {
+      if (err instanceof ApiRequestError && err.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      setNotice({
+        type: "error",
+        text:
+          err instanceof Error
+            ? err.message
+            : "Failed to activate Pro for this user.",
+      });
+    } finally {
+      setAdminActivating(false);
+    }
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -611,6 +659,40 @@ function DashboardContent() {
             </div>
           </div>
         </section>
+
+        {isAdmin ? (
+          <section className="dashboard-upgrade-banner">
+            <div>
+              <span className="section-label">Admin Panel</span>
+              <h2>Manual Pro Activation</h2>
+              <p>
+                After confirming PayPal or Wise payment, enter the customer email
+                and activate Pro directly from this dashboard.
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleAdminActivatePro}
+              className="dashboard-upgrade-actions"
+            >
+              <input
+                type="email"
+                value={adminCustomerEmail}
+                onChange={(event) => setAdminCustomerEmail(event.target.value)}
+                placeholder="customer@email.com"
+                className="dashboard-admin-input"
+              />
+
+              <button
+                type="submit"
+                disabled={adminActivating}
+                className="primary-button"
+              >
+                {adminActivating ? "Activating..." : "Activate Pro"}
+              </button>
+            </form>
+          </section>
+        ) : null}
 
         {!isPro ? (
           <section className="dashboard-upgrade-banner">

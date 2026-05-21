@@ -43,6 +43,14 @@ export type SubmitManualPaymentResponse = {
   is_pro: boolean;
 };
 
+export type AdminActivateProResponse = {
+  message: string;
+  email: string;
+  current_plan: string;
+  subscription_status: string;
+  is_pro: boolean;
+};
+
 export class ApiRequestError extends Error {
   status: number;
   code?: string;
@@ -243,6 +251,16 @@ export const api = {
   } = {}) =>
     request<SubmitManualPaymentResponse>(
       "/billing/manual-payment/submit",
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      },
+      true
+    ),
+
+  activateProAdmin: (payload: { email: string }) =>
+    request<AdminActivateProResponse>(
+      "/billing/admin/activate-pro",
       {
         method: "POST",
         body: JSON.stringify(payload),

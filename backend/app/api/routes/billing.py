@@ -1,6 +1,6 @@
 import os
 
-from fastapi import APIRouter, Depends, Header, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user
@@ -146,20 +146,20 @@ def submit_manual_payment(
 def activate_pro_admin(
     payload: AdminActivateProRequest,
     db: Session = Depends(get_db),
-    x_admin_secret: str | None = Header(default=None),
+    current_user: User = Depends(get_current_user),
 ) -> AdminActivateProResponse:
-    admin_secret = env_value("ADMIN_SECRET")
+    admin_email = env_value("ADMIN_EMAIL").lower()
 
-    if not admin_secret:
+    if not admin_email:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="ADMIN_SECRET is not configured.",
+            detail="ADMIN_EMAIL is not configured.",
         )
 
-    if not x_admin_secret or x_admin_secret != admin_secret:
+    if current_user.email.lower() != admin_email:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid admin secret.",
+            detail="Admin access required.",
         )
 
     user = db.query(User).filter(User.email == payload.email).first()
