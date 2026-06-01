@@ -259,7 +259,30 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+            </section>
+
+      <section className="section-block section-alt">
+        <div className="container">
+          <div className="section-heading section-heading-left">
+            <h2>Airbnb ROI Calculator and STR Investment Analysis</h2>
+
+            <p>
+              HostMetricsPro helps Airbnb hosts and short-term rental investors
+              analyze property cash flow, cap rate, cash-on-cash return, break-even
+              occupancy, and overall investment performance. Whether you are evaluating
+              your first Airbnb property or scaling a portfolio, our tools help you
+              make faster and more informed investment decisions.
+            </p>
+
+            <p>
+              Use our Airbnb ROI Calculator, Cash Flow Calculator, Cap Rate Calculator,
+              and Airbnb Investment Analysis tools to compare opportunities and identify
+              profitable short-term rental investments.
+            </p>
+          </div>
+        </div>
       </section>
+
     </div>
   );
 }
