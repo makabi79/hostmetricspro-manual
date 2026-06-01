@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Cap Rate Calculator | Airbnb & STR Property Analysis",
+  description:
+    "Calculate Airbnb and short-term rental property cap rate, NOI, cash flow, expenses, and investment profitability with HostMetricsPro.",
+};
+
 export default function CapRateCalculatorPage() {
   return (
     <main
@@ -91,6 +97,46 @@ export default function CapRateCalculatorPage() {
           HostMetricsPro helps Airbnb investors analyze cap rate, occupancy,
           cash flow, and short-term rental profitability before purchasing
           properties.
+        </p>
+      </section>
+
+      <section
+        style={{
+          marginTop: "64px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "48px",
+            marginBottom: "24px",
+          }}
+        >
+          How to Calculate Cap Rate
+        </h2>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+            marginBottom: "24px",
+          }}
+        >
+          Cap rate is calculated by dividing a property's annual net operating
+          income (NOI) by its current market value or purchase price. Real
+          estate investors use cap rate to compare investment opportunities and
+          evaluate potential returns.
+        </p>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+          }}
+        >
+          A strong cap rate depends on market conditions, property type,
+          occupancy, operating expenses, and rental income. HostMetricsPro helps
+          Airbnb and short-term rental investors analyze cap rate alongside cash
+          flow, ROI, and other key investment metrics.
         </p>
       </section>
     </main>
