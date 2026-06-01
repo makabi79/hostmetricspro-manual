@@ -1,4 +1,9 @@
 import Link from "next/link";
+export const metadata = {
+  title: "HostMetricsPro | Airbnb ROI & STR Investment Analysis Tool",
+  description:
+    "Analyze Airbnb and short-term rental deals with cash flow, ROI, cap rate, break-even occupancy, and risk metrics in one simple workflow.",
+};
 
 const benefits = [
   "Instant cash flow, cap rate, ROI, and break-even occupancy analysis",
