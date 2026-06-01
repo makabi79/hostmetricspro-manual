@@ -120,6 +120,41 @@ export default function AirbnbRoiCalculatorPage() {
         investment analysis tools.
       </p>
 
+      <h2
+        style={{
+          fontSize: "36px",
+          marginBottom: "20px",
+        }}
+      >
+        How to Calculate Airbnb ROI
+      </h2>
+
+      <p
+        style={{
+          fontSize: "18px",
+          lineHeight: "1.8",
+          marginBottom: "24px",
+        }}
+      >
+        Airbnb ROI is calculated by comparing your annual profit to your total
+        investment. Investors typically evaluate purchase price, financing,
+        operating expenses, occupancy rate, average nightly rate, and expected
+        cash flow before purchasing a property.
+      </p>
+
+      <p
+        style={{
+          fontSize: "18px",
+          lineHeight: "1.8",
+          marginBottom: "48px",
+        }}
+      >
+        A strong Airbnb investment often combines positive cash flow, healthy
+        occupancy, sustainable operating costs, and an attractive cap rate.
+        HostMetricsPro helps investors analyze these metrics quickly and make
+        more informed decisions.
+      </p>
+
       <a
         href="/signup"
         style={{
