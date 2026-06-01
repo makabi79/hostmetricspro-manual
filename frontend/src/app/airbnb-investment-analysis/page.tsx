@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Airbnb Investment Analysis | ROI, Cash Flow & STR Profitability",
+  description:
+    "Analyze Airbnb and short-term rental investments with ROI, cash flow, cap rate, occupancy, expenses, and profitability metrics using HostMetricsPro.",
+};
+
 export default function AirbnbInvestmentAnalysisPage() {
   return (
     <main
@@ -91,6 +97,47 @@ export default function AirbnbInvestmentAnalysisPage() {
           HostMetricsPro helps Airbnb investors analyze STR properties with ROI,
           cash flow, occupancy, cap rate, and profitability metrics before
           buying investment properties.
+        </p>
+      </section>
+
+      <section
+        style={{
+          marginTop: "64px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "48px",
+            marginBottom: "24px",
+          }}
+        >
+          How to Analyze an Airbnb Investment
+        </h2>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+            marginBottom: "24px",
+          }}
+        >
+          Airbnb investment analysis involves evaluating property income,
+          occupancy rates, operating expenses, financing costs, cash flow,
+          return on investment, and overall profitability. Investors use these
+          metrics to compare opportunities and identify high-performing
+          short-term rental properties.
+        </p>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+          }}
+        >
+          Successful Airbnb investments typically combine strong occupancy,
+          positive cash flow, healthy cap rates, and sustainable operating
+          costs. HostMetricsPro helps investors analyze these factors quickly
+          and make more informed investment decisions.
         </p>
       </section>
     </main>

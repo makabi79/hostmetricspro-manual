@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Cash Flow Calculator | Airbnb & STR Cash Flow Analysis",
+  description:
+    "Calculate Airbnb and short-term rental cash flow, expenses, occupancy, and investment profitability with HostMetricsPro.",
+};
+
 export default function CashFlowCalculatorPage() {
   return (
     <main
@@ -90,6 +96,46 @@ export default function CashFlowCalculatorPage() {
           HostMetricsPro helps Airbnb investors calculate monthly cash flow,
           expenses, occupancy, ROI, and STR profitability using fast property
           analysis tools.
+        </p>
+      </section>
+
+      <section
+        style={{
+          marginTop: "64px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "48px",
+            marginBottom: "24px",
+          }}
+        >
+          How to Calculate Airbnb Cash Flow
+        </h2>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+            marginBottom: "24px",
+          }}
+        >
+          Airbnb cash flow is calculated by subtracting all operating expenses,
+          mortgage payments, taxes, insurance, utilities, maintenance, and
+          management costs from rental income. Positive cash flow indicates that
+          a property generates more income than expenses.
+        </p>
+
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: "1.8",
+          }}
+        >
+          Investors use cash flow analysis to evaluate property performance,
+          compare investment opportunities, and identify profitable short-term
+          rental properties. HostMetricsPro helps investors analyze cash flow
+          alongside ROI, cap rate, occupancy, and other key investment metrics.
         </p>
       </section>
     </main>
