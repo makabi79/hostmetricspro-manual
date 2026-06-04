@@ -1,38 +1,38 @@
 export const metadata = {
-  title: "Airbnb ROI Calculator | HostMetricsPro",
+  title: "Airbnb ROI Calculator | Short-Term Rental Investment Analysis",
   description:
-    "Analyze Airbnb and short-term rental investments with ROI, cash flow, cap rate, occupancy, and risk analysis.",
+    "Use the Airbnb ROI Calculator to analyze short-term rental profit, cash flow, cap rate, occupancy, expenses, and investment returns before you buy.",
 };
 
 export default function AirbnbRoiCalculatorPage() {
   return (
-    <div
-      style={{
-        maxWidth: "1000px",
-        margin: "0 auto",
-        padding: "60px 20px",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "48px",
-          fontWeight: "700",
-          marginBottom: "24px",
-        }}
-      >
+    <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "60px 20px" }}>
+      <h1 style={{ fontSize: "48px", fontWeight: "700", marginBottom: "24px" }}>
         Airbnb ROI Calculator
       </h1>
 
-      <p
+      <p style={{ fontSize: "20px", lineHeight: "1.7", marginBottom: "32px" }}>
+        Use the Airbnb ROI Calculator to estimate short-term rental returns,
+        monthly cash flow, cap rate, break-even occupancy, and investment risk
+        before buying an Airbnb property.
+      </p>
+
+      <a
+        href="/signup"
         style={{
-          fontSize: "20px",
-          lineHeight: "1.7",
-          marginBottom: "32px",
+          display: "inline-block",
+          background: "#2563eb",
+          color: "#ffffff",
+          padding: "16px 28px",
+          borderRadius: "12px",
+          textDecoration: "none",
+          fontWeight: "700",
+          fontSize: "18px",
+          marginBottom: "50px",
         }}
       >
-        Analyze Airbnb and short-term rental investment properties with
-        HostMetricsPro.
-      </p>
+        Start Free Airbnb Analysis
+      </a>
 
       <div
         style={{
@@ -42,117 +42,81 @@ export default function AirbnbRoiCalculatorPage() {
           marginBottom: "48px",
         }}
       >
-        <div
-          style={{
-            border: "1px solid #e5e7eb",
-            borderRadius: "16px",
-            padding: "24px",
-          }}
-        >
-          <h3>ROI Analysis</h3>
-          <p>Calculate return on investment for Airbnb properties.</p>
+        <div style={{ border: "1px solid #e5e7eb", borderRadius: "16px", padding: "24px" }}>
+          <h3>Airbnb ROI</h3>
+          <p>Estimate return on investment based on profit and total invested capital.</p>
         </div>
 
-        <div
-          style={{
-            border: "1px solid #e5e7eb",
-            borderRadius: "16px",
-            padding: "24px",
-          }}
-        >
+        <div style={{ border: "1px solid #e5e7eb", borderRadius: "16px", padding: "24px" }}>
           <h3>Cash Flow</h3>
-          <p>Estimate monthly and yearly rental cash flow.</p>
+          <p>Calculate monthly and annual Airbnb rental cash flow after expenses.</p>
         </div>
 
-        <div
-          style={{
-            border: "1px solid #e5e7eb",
-            borderRadius: "16px",
-            padding: "24px",
-          }}
-        >
+        <div style={{ border: "1px solid #e5e7eb", borderRadius: "16px", padding: "24px" }}>
           <h3>Cap Rate</h3>
-          <p>Measure Airbnb property profitability with cap rate analysis.</p>
+          <p>Measure short-term rental profitability using net operating income.</p>
         </div>
 
-        <div
-          style={{
-            border: "1px solid #e5e7eb",
-            borderRadius: "16px",
-            padding: "24px",
-          }}
-        >
+        <div style={{ border: "1px solid #e5e7eb", borderRadius: "16px", padding: "24px" }}>
           <h3>Break-even Occupancy</h3>
-          <p>Understand the occupancy needed to stay profitable.</p>
+          <p>Find the occupancy rate needed for the property to avoid losing money.</p>
         </div>
       </div>
 
-      <h2
-        style={{
-          fontSize: "36px",
-          marginBottom: "20px",
-        }}
-      >
-        Why Use HostMetricsPro?
+      <h2 style={{ fontSize: "36px", marginBottom: "20px" }}>
+        What Is Airbnb ROI?
       </h2>
 
-      <p
-        style={{
-          fontSize: "18px",
-          lineHeight: "1.8",
-          marginBottom: "24px",
-        }}
-      >
-        HostMetricsPro helps Airbnb and STR investors analyze deals before
-        buying properties. Calculate ROI, cash flow, cap rate, expenses,
-        occupancy, and investment risk in seconds.
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "24px" }}>
+        Airbnb ROI measures how much return an investor earns from a short-term
+        rental property compared with the total money invested. It helps compare
+        Airbnb deals, estimate profitability, and decide whether a property is
+        worth buying.
       </p>
 
-      <p
-        style={{
-          fontSize: "18px",
-          lineHeight: "1.8",
-          marginBottom: "48px",
-        }}
-      >
-        Whether you are investing in vacation rentals, Airbnb apartments, or
-        short-term rental homes, HostMetricsPro gives you fast underwriting and
-        investment analysis tools.
-      </p>
-
-      <h2
-        style={{
-          fontSize: "36px",
-          marginBottom: "20px",
-        }}
-      >
+      <h2 style={{ fontSize: "36px", marginBottom: "20px" }}>
         How to Calculate Airbnb ROI
       </h2>
 
-      <p
-        style={{
-          fontSize: "18px",
-          lineHeight: "1.8",
-          marginBottom: "24px",
-        }}
-      >
-        Airbnb ROI is calculated by comparing your annual profit to your total
-        investment. Investors typically evaluate purchase price, financing,
-        operating expenses, occupancy rate, average nightly rate, and expected
-        cash flow before purchasing a property.
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "24px" }}>
+        Airbnb ROI is usually calculated by dividing annual profit by total
+        investment. Investors should include purchase price, down payment,
+        closing costs, furniture, repairs, mortgage payments, taxes, insurance,
+        cleaning, utilities, platform fees, and property management costs.
       </p>
 
-      <p
-        style={{
-          fontSize: "18px",
-          lineHeight: "1.8",
-          marginBottom: "48px",
-        }}
-      >
-        A strong Airbnb investment often combines positive cash flow, healthy
-        occupancy, sustainable operating costs, and an attractive cap rate.
-        HostMetricsPro helps investors analyze these metrics quickly and make
-        more informed decisions.
+      <h2 style={{ fontSize: "36px", marginBottom: "20px" }}>
+        Why Use HostMetricsPro?
+      </h2>
+
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "24px" }}>
+        HostMetricsPro helps Airbnb and short-term rental investors analyze
+        deals before they buy. You can estimate ROI, cash flow, cap rate,
+        occupancy risk, expenses, and deal quality in one focused dashboard.
+      </p>
+
+      <h2 style={{ fontSize: "36px", marginBottom: "20px" }}>
+        Airbnb ROI Calculator FAQ
+      </h2>
+
+      <h3>What is a good Airbnb ROI?</h3>
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "20px" }}>
+        A good Airbnb ROI depends on the market, financing, expenses, and risk.
+        Many investors look for positive cash flow, strong occupancy, and returns
+        that outperform traditional long-term rental properties.
+      </p>
+
+      <h3>What expenses should I include?</h3>
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "20px" }}>
+        Include mortgage, taxes, insurance, utilities, cleaning, repairs,
+        furnishing, supplies, management fees, platform fees, and vacancy risk.
+      </p>
+
+      <h3>Is Airbnb more profitable than long-term rental?</h3>
+      <p style={{ fontSize: "18px", lineHeight: "1.8", marginBottom: "48px" }}>
+        Airbnb can generate higher revenue than long-term rental, but it usually
+        has higher expenses, more management work, and stronger occupancy risk.
+        That is why analyzing the numbers before buying is important.
       </p>
 
       <a
@@ -168,7 +132,7 @@ export default function AirbnbRoiCalculatorPage() {
           fontSize: "18px",
         }}
       >
-        Start Free Analysis
+        Analyze Your Airbnb Deal
       </a>
     </div>
   );
