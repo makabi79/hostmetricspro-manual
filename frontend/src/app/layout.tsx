@@ -33,7 +33,10 @@ export const metadata: Metadata = {
   publisher: "HostMetricsPro",
 
   verification: {
-    google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
+  google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
+  other: {
+    "msvalidate.01": ["331C636546915CE1E58F5B8D56D069D8"],
+    },
   },
 
   alternates: {
