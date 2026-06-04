@@ -1,44 +1,47 @@
 export const metadata = {
-  title: "Rental Property Calculator | HostMetricsPro",
+  title: "Rental Property Calculator | ROI, Cash Flow & Cap Rate",
   description:
-    "Analyze rental property ROI, cash flow, cap rate, and investment performance with HostMetricsPro.",
+    "Analyze rental property ROI, cash flow, cap rate, expenses, and investment performance with HostMetricsPro.",
 };
 
 export default function RentalPropertyCalculatorPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-20">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold mb-6">
-          Rental Property Calculator
-        </h1>
+    <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "80px 24px" }}>
+      <h1 style={{ fontSize: "56px", fontWeight: "700", marginBottom: "24px" }}>
+        Rental Property Calculator
+      </h1>
 
-        <p className="text-lg text-gray-300 mb-8">
-          Analyze rental property cash flow, ROI, cap rate, and break-even occupancy instantly.
+      <p style={{ fontSize: "22px", lineHeight: "1.6", marginBottom: "40px" }}>
+        Analyze rental property cash flow, ROI, cap rate, expenses, and investment profitability with HostMetricsPro.
+      </p>
+
+      <section style={{ marginBottom: "40px" }}>
+        <h2>What Is a Rental Property Calculator?</h2>
+        <p>
+          A rental property calculator helps real estate investors estimate whether a property can generate positive cash flow and long-term returns.
         </p>
+      </section>
 
-        <div className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
-          <h2 className="text-2xl font-semibold mb-4">
-            Why Use HostMetricsPro?
-          </h2>
+      <section style={{ marginBottom: "40px" }}>
+        <h2>Calculate Cash Flow, ROI, and Cap Rate</h2>
+        <p>
+          HostMetricsPro helps you analyze monthly income, operating expenses, mortgage payments, net cash flow, cap rate, and return on investment.
+        </p>
+      </section>
 
-          <ul className="space-y-3 text-gray-300">
-            <li>✔ ROI calculation</li>
-            <li>✔ Cap rate analysis</li>
-            <li>✔ Cash flow forecasting</li>
-            <li>✔ Airbnb investment scoring</li>
-            <li>✔ Break-even occupancy analysis</li>
-          </ul>
-        </div>
+      <section style={{ marginBottom: "40px" }}>
+        <h2>Who Is This Calculator For?</h2>
+        <p>
+          This calculator is useful for rental property investors, Airbnb hosts, short-term rental operators, and real estate buyers comparing multiple deals.
+        </p>
+      </section>
 
-        <div className="mt-10">
-          <a
-            href="/"
-            className="inline-block bg-white text-black px-6 py-3 rounded-xl font-semibold"
-          >
-            Analyze Your Property
-          </a>
-        </div>
-      </div>
+      <section>
+        <h2>Start Analyzing Rental Property Deals</h2>
+        <p>
+          Use HostMetricsPro to compare rental properties, estimate profitability, and make smarter investment decisions.
+        </p>
+      </section>
     </main>
   );
 }
