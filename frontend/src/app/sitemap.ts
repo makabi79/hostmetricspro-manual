@@ -36,11 +36,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-  url: `${siteUrl}/rental-property-calculator`,
-  lastModified: currentDate,
-  changeFrequency: "weekly",
-  priority: 0.8,
-  },
+      url: `${siteUrl}/rental-property-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/airbnb-profit-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     {
       url: `${siteUrl}/airbnb-investment-analysis`,
       lastModified: currentDate,
@@ -65,6 +71,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
-    
   ];
 }
