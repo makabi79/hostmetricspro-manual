@@ -87,6 +87,24 @@ export default function AirbnbExpenseCalculatorPage() {
             </div>
           </div>
         </section>
+
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold mb-6">
+            Common Airbnb Operating Expenses
+          </h2>
+
+          <p className="text-gray-300 leading-8 mb-4">
+            Airbnb operating expenses can include cleaning, repairs, utilities,
+            property management, insurance, taxes, supplies, software tools,
+            guest amenities, and platform fees.
+          </p>
+
+          <p className="text-gray-300 leading-8">
+            A strong Airbnb investment should leave enough profit after all
+            recurring expenses are paid. Estimating these costs before buying a
+            property helps investors avoid negative cash flow.
+          </p>
+        </section>
       </div>
     </main>
   );
