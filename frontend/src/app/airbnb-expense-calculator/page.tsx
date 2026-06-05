@@ -14,7 +14,8 @@ export default function AirbnbExpenseCalculatorPage() {
 
         <p className="text-lg text-gray-300 mb-8">
           Estimate Airbnb expenses, operating costs, cleaning fees, utilities,
-          maintenance, and management fees before investing in a short-term rental.
+          maintenance, and management fees before investing in a short-term
+          rental.
         </p>
 
         <div className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
@@ -39,6 +40,53 @@ export default function AirbnbExpenseCalculatorPage() {
             Analyze Your Airbnb Deal
           </a>
         </div>
+
+        <section className="mt-20">
+          <h2 className="text-3xl font-bold mb-6">
+            What Is an Airbnb Expense Calculator?
+          </h2>
+
+          <p className="text-gray-300 leading-8 mb-4">
+            An Airbnb Expense Calculator helps hosts and investors estimate the
+            true operating costs of a short-term rental property before making
+            an investment decision.
+          </p>
+
+          <p className="text-gray-300 leading-8">
+            Understanding expenses such as cleaning fees, utilities,
+            maintenance, insurance, property management, and platform fees is
+            essential for calculating accurate cash flow and profitability.
+          </p>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold mb-6">
+            Airbnb Expense Calculator FAQ
+          </h2>
+
+          <div className="space-y-6 text-gray-300 leading-8">
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                What are the biggest Airbnb expenses?
+              </h3>
+              <p>
+                The largest Airbnb expenses often include mortgage payments,
+                cleaning fees, utilities, maintenance, insurance, and platform
+                fees.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                Why is expense tracking important?
+              </h3>
+              <p>
+                Tracking expenses helps investors calculate accurate cash flow,
+                profitability, ROI, and long-term investment performance.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
