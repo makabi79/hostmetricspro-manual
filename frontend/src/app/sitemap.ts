@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+        {
+      url: `${siteUrl}/occupancy-rate-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     {
       url: `${siteUrl}/rental-property-calculator`,
       lastModified: currentDate,
@@ -65,6 +71,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    {
+  url: `${siteUrl}/airbnb-expense-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
     {
       url: `${siteUrl}/refund`,
       lastModified: currentDate,
