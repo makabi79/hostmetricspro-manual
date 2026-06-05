@@ -214,6 +214,47 @@ export default function HomePage() {
                 Calculate Airbnb return on investment, annual ROI, and cash-on-cash returns.
               </p>
             </Link>
+            <Link href="/noi-calculator" className="surface-card">
+  <h3>NOI Calculator</h3>
+  <p>
+    Calculate net operating income for rental properties and Airbnb investments.
+  </p>
+</Link>
+
+<Link href="/dscr-calculator" className="surface-card">
+  <h3>DSCR Calculator</h3>
+  <p>
+    Analyze debt service coverage ratio and financing strength.
+  </p>
+</Link>
+
+<Link href="/real-estate-roi-calculator" className="surface-card">
+  <h3>Real Estate ROI Calculator</h3>
+  <p>
+    Calculate property ROI, returns, and investment performance.
+  </p>
+</Link>
+
+<Link href="/investment-property-calculator" className="surface-card">
+  <h3>Investment Property Calculator</h3>
+  <p>
+    Evaluate rental income, cash flow, and profitability.
+  </p>
+</Link>
+
+<Link href="/cash-on-cash-return-calculator" className="surface-card">
+  <h3>Cash on Cash Return Calculator</h3>
+  <p>
+    Measure annual cash returns compared with invested capital.
+  </p>
+</Link>
+
+<Link href="/rental-yield-calculator" className="surface-card">
+  <h3>Rental Yield Calculator</h3>
+  <p>
+    Calculate gross and net rental yield for investment properties.
+  </p>
+</Link>
 
             <Link href="/cap-rate-calculator" className="surface-card">
               <h3>Cap Rate Calculator</h3>

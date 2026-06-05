@@ -13,6 +13,36 @@ const posts = [
     description:
       "Learn what cap rate means, how to calculate it, and what investors consider a strong Airbnb cap rate.",
   },
+  {
+  title: "DSCR Explained for Rental Property Investors",
+  href: "/blog/dscr-explained-for-rental-property-investors",
+  description:
+    "Understand debt service coverage ratio, lender requirements, and real estate financing analysis.",
+    },
+  {
+  title: "How to Calculate Airbnb ROI",
+  href: "/blog/how-to-calculate-airbnb-roi",
+  description:
+    "Learn how investors calculate Airbnb ROI, cash flow, expenses, and investment returns.",
+    },
+  {
+  title: "NOI vs Cash Flow",
+  href: "/blog/noi-vs-cash-flow",
+  description:
+    "Learn the difference between net operating income and cash flow for rental property analysis.",
+    },
+    {
+  title: "Cash on Cash Return vs ROI",
+  href: "/blog/cash-on-cash-return-vs-roi",
+  description:
+    "Understand the difference between cash on cash return and ROI for real estate investment analysis.",
+    },
+  {
+  title: "Airbnb vs Long-Term Rental",
+  href: "/blog/airbnb-vs-long-term-rental",
+  description:
+    "Compare Airbnb and traditional rental investments, profitability, risk, and ROI.",
+   },
 ];
 
 export default function BlogPage() {
