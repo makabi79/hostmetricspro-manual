@@ -1,24 +1,23 @@
 export const metadata = {
-  title: "Airbnb Profit Calculator | HostMetricsPro",
+  title: "Airbnb Profit Calculator | Revenue, Cash Flow & ROI Analysis",
   description:
-    "Calculate Airbnb profit, monthly cash flow, ROI, cap rate, and break-even occupancy for short-term rental investments.",
+    "Calculate Airbnb profit, monthly cash flow, occupancy, revenue, expenses, ROI, cap rate, and break-even occupancy for short-term rental investments.",
 };
 
 export default function AirbnbProfitCalculatorPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-20">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold mb-6">
-          Airbnb Profit Calculator
-        </h1>
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-5xl font-bold mb-6">Airbnb Profit Calculator</h1>
 
-        <p className="text-lg text-gray-300 mb-8">
-          Estimate Airbnb profit, revenue, expenses, cash flow, ROI, and
-          break-even occupancy before investing.
+        <p className="text-xl text-gray-300 mb-10">
+          Calculate Airbnb profit, revenue, occupancy, cash flow, cap rate,
+          return on investment, and short-term rental performance before buying
+          your next Airbnb property.
         </p>
 
         <a
-          href="/"
+          href="/signup"
           className="inline-block bg-white text-black px-6 py-3 rounded-xl font-semibold"
         >
           Analyze Your Airbnb Deal
@@ -30,15 +29,15 @@ export default function AirbnbProfitCalculatorPage() {
           </h2>
 
           <p className="text-gray-300 leading-8 mb-4">
-            An Airbnb Profit Calculator helps short-term rental investors
-            estimate revenue, expenses, occupancy performance, and overall
-            profitability before purchasing a property.
+            An Airbnb Profit Calculator helps investors estimate revenue,
+            operating expenses, occupancy, and overall profitability before
+            purchasing a short-term rental property.
           </p>
 
           <p className="text-gray-300 leading-8">
-            By analyzing nightly rates, occupancy levels, operating expenses,
-            mortgage costs, and seasonal trends, investors can make more
-            informed decisions and reduce investment risk.
+            By modeling nightly rates, occupancy levels, mortgage payments,
+            cleaning fees, maintenance expenses, taxes, and seasonality,
+            investors can make more informed decisions and reduce risk.
           </p>
         </section>
 
@@ -49,32 +48,63 @@ export default function AirbnbProfitCalculatorPage() {
 
           <ul className="space-y-4 text-gray-300 leading-8">
             <li>
-              <strong>Monthly Revenue:</strong> Estimated income generated from
-              guest bookings.
+              <strong>Monthly Revenue:</strong> Projected income from guest
+              bookings.
             </li>
-
             <li>
-              <strong>Occupancy Rate:</strong> The percentage of nights booked
-              during a month or year.
+              <strong>Occupancy Rate:</strong> Percentage of booked nights.
             </li>
-
             <li>
-              <strong>Cash Flow:</strong> Revenue remaining after mortgage
-              payments and operating expenses.
+              <strong>Cash Flow:</strong> Income remaining after all expenses.
             </li>
-
             <li>
-              <strong>Cap Rate:</strong> Net operating income divided by
-              property value.
+              <strong>Cap Rate:</strong> NOI divided by property value.
             </li>
-
             <li>
-              <strong>ROI:</strong> Return on investment based on cash invested
-              and annual profit.
+              <strong>ROI:</strong> Return generated from invested capital.
+            </li>
+            <li>
+              <strong>Break-Even Occupancy:</strong> Minimum occupancy needed
+              to cover costs.
             </li>
           </ul>
         </section>
-                <section className="mt-16">
+
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold mb-6">
+            How Airbnb Profit Is Calculated
+          </h2>
+
+          <p className="text-gray-300 leading-8 mb-4">
+            Airbnb profit is calculated by subtracting all operating expenses
+            and financing costs from total rental revenue.
+          </p>
+
+          <p className="text-gray-300 leading-8">
+            Expenses often include mortgage payments, cleaning fees,
+            maintenance, utilities, insurance, supplies, property management,
+            platform fees, and taxes.
+          </p>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold mb-6">
+            Why Profit Analysis Matters
+          </h2>
+
+          <p className="text-gray-300 leading-8 mb-4">
+            Many Airbnb properties generate strong revenue but weak profit due
+            to high operating costs. Profit analysis helps investors identify
+            properties with sustainable cash flow and realistic returns.
+          </p>
+
+          <p className="text-gray-300 leading-8">
+            Comparing multiple deals using the same assumptions allows investors
+            to make data-driven investment decisions.
+          </p>
+        </section>
+
+        <section className="mt-16">
           <h2 className="text-3xl font-bold mb-6">
             Airbnb Profit Calculator FAQ
           </h2>
@@ -85,9 +115,9 @@ export default function AirbnbProfitCalculatorPage() {
                 How do you calculate Airbnb profit?
               </h3>
               <p>
-                Airbnb profit is calculated by subtracting mortgage payments,
-                cleaning costs, utilities, maintenance, platform fees,
-                insurance, and other operating expenses from rental revenue.
+                Profit equals rental revenue minus mortgage payments, cleaning
+                fees, maintenance, utilities, insurance, taxes, platform fees,
+                and other operating expenses.
               </p>
             </div>
 
@@ -96,28 +126,50 @@ export default function AirbnbProfitCalculatorPage() {
                 Is Airbnb still profitable?
               </h3>
               <p>
-                Airbnb profitability depends on nightly rate, occupancy,
-                location, expenses, financing costs, and local short-term rental
-                regulations.
+                Profitability depends on occupancy, nightly rates, location,
+                expenses, financing, and local regulations.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                What is a good Airbnb ROI?
+              </h3>
+              <p>
+                ROI expectations vary by market and risk tolerance, but
+                investors typically compare ROI alongside cash flow, cap rate,
+                and occupancy.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                Why is occupancy important?
+              </h3>
+              <p>
+                Occupancy directly impacts revenue and profitability. Higher
+                occupancy generally increases cash flow when expenses remain
+                controlled.
               </p>
             </div>
           </div>
         </section>
-                <section className="mt-16">
+
+        <section className="mt-16">
           <h2 className="text-3xl font-bold mb-6">
             Why Airbnb Investors Use Profit Calculators
           </h2>
 
           <p className="text-gray-300 leading-8 mb-4">
-            Successful Airbnb investors rely on profit calculators to evaluate
-            deals before purchasing properties. Understanding projected revenue
-            and expenses helps reduce risk and improve investment decisions.
+            Successful investors analyze projected profit before purchasing a
+            property. Understanding revenue potential and operating costs helps
+            reduce risk and improve investment outcomes.
           </p>
 
           <p className="text-gray-300 leading-8">
-            A reliable Airbnb profit analysis should include occupancy,
-            nightly rates, mortgage costs, cleaning expenses, maintenance,
-            taxes, insurance, and seasonal demand fluctuations.
+            HostMetricsPro helps investors evaluate occupancy, revenue,
+            expenses, cash flow, cap rate, ROI, and overall Airbnb investment
+            quality in one platform.
           </p>
         </section>
       </div>

@@ -77,6 +77,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
   changeFrequency: "weekly",
   priority: 0.8,
   },
+  {
+  url: `${siteUrl}/airbnb-revenue-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/noi-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/dscr-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/real-estate-roi-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/investment-property-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/cash-on-cash-return-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/rental-yield-calculator`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
     {
       url: `${siteUrl}/refund`,
       lastModified: currentDate,
