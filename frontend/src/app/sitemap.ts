@@ -119,7 +119,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   changeFrequency: "weekly",
   priority: 0.8,
   },
-    {
+  {
+  url: `${siteUrl}/blog`,
+  lastModified: currentDate,
+  changeFrequency: "weekly",
+  priority: 0.8,
+  },
+  {
+  url: `${siteUrl}/blog/what-is-a-good-airbnb-cap-rate`,
+  lastModified: currentDate,
+  changeFrequency: "monthly",
+  priority: 0.7,
+  },
+  {
+  url: `${siteUrl}/blog/how-to-calculate-airbnb-roi`,
+  lastModified: currentDate,
+  changeFrequency: "monthly",
+  priority: 0.7,
+  },
+  {
+  url: `${siteUrl}/blog/noi-vs-cash-flow`,
+  lastModified: currentDate,
+  changeFrequency: "monthly",
+  priority: 0.7,
+  },
+  {
       url: `${siteUrl}/refund`,
       lastModified: currentDate,
       changeFrequency: "monthly",
