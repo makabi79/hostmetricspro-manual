@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   publisher: "HostMetricsPro",
 
   verification: {
-  google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
-  other: {
-    "msvalidate.01": ["331C636546915CE1E58F5B8D56D069D8"],
+    google: "VLoEafaqKicf1F_45oOgZlTwuMZLGDzTZI73RpLgUvQ",
+    other: {
+      "msvalidate.01": ["331C636546915CE1E58F5B8D56D069D8"],
     },
   },
 
@@ -63,7 +63,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-
     googleBot: {
       index: true,
       follow: true,
@@ -109,20 +108,25 @@ export default function RootLayout({
                 </div>
 
                 <div className="site-footer-links">
-                  <a href="/" className="site-footer-link">
-                    Home
-                  </a>
-
-                  <a href="/pricing" className="site-footer-link">
-                    Pricing
-                  </a>
-
-                  <a href="/signup" className="site-footer-link">
-                    Signup
-                  </a>
+                  <a href="/" className="site-footer-link">Home</a>
+                  <a href="/pricing" className="site-footer-link">Pricing</a>
+                  <a href="/signup" className="site-footer-link">Signup</a>
+                  <a href="/blog" className="site-footer-link">Blog</a>
 
                   <a href="/airbnb-roi-calculator" className="site-footer-link">
-                    ROI Calculator
+                    Airbnb ROI Calculator
+                  </a>
+
+                  <a href="/airbnb-profit-calculator" className="site-footer-link">
+                    Airbnb Profit Calculator
+                  </a>
+
+                  <a href="/airbnb-revenue-calculator" className="site-footer-link">
+                    Airbnb Revenue Calculator
+                  </a>
+
+                  <a href="/airbnb-expense-calculator" className="site-footer-link">
+                    Airbnb Expense Calculator
                   </a>
 
                   <a href="/cap-rate-calculator" className="site-footer-link">
@@ -133,24 +137,43 @@ export default function RootLayout({
                     Cash Flow Calculator
                   </a>
 
+                  <a href="/noi-calculator" className="site-footer-link">
+                    NOI Calculator
+                  </a>
+
+                  <a href="/dscr-calculator" className="site-footer-link">
+                    DSCR Calculator
+                  </a>
+
+                  <a href="/real-estate-roi-calculator" className="site-footer-link">
+                    Real Estate ROI Calculator
+                  </a>
+
                   <a
-                    href="/airbnb-investment-analysis"
+                    href="/investment-property-calculator"
                     className="site-footer-link"
                   >
+                    Investment Property Calculator
+                  </a>
+
+                  <a
+                    href="/cash-on-cash-return-calculator"
+                    className="site-footer-link"
+                  >
+                    Cash on Cash Return Calculator
+                  </a>
+
+                  <a href="/rental-yield-calculator" className="site-footer-link">
+                    Rental Yield Calculator
+                  </a>
+
+                  <a href="/airbnb-investment-analysis" className="site-footer-link">
                     Investment Analysis
                   </a>
 
-                  <a href="/terms" className="site-footer-link">
-                    Terms of Service
-                  </a>
-
-                  <a href="/privacy" className="site-footer-link">
-                    Privacy Policy
-                  </a>
-
-                  <a href="/refund" className="site-footer-link">
-                    Refund Policy
-                  </a>
+                  <a href="/terms" className="site-footer-link">Terms</a>
+                  <a href="/privacy" className="site-footer-link">Privacy</a>
+                  <a href="/refund" className="site-footer-link">Refund</a>
 
                   <a
                     href="mailto:support.hostmetricpro@gmail.com"
