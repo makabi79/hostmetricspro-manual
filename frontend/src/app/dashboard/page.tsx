@@ -17,6 +17,8 @@ import { AuthGuard } from "@/components/auth/AuthGuard";
 import { useAuth } from "@/components/auth/AuthProvider";
 
 type SimpleDealForm = {
+  management_fee_percent: string;
+  platform_fee_percent: string;
   title: string;
   location: string;
   purchase_price: string;
